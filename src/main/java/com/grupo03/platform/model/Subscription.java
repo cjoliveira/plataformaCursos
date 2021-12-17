@@ -11,32 +11,28 @@ public class Subscription {
 
     @Id
     private int id;
-
-    @ManyToOne
-    private int course_id;
-
-    @ManyToOne
-    private int user_id;
     private double progress;
     private String status;
     private Timestamp created_at;
     private Timestamp updated_at;
-
+    // ManyToOne -> Vários cetificados para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
-
-    public Users getUsers() {
-        return users;
-    }
+    // ManyToOne -> Vários cetificados para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public Subscription(){
 
     }
 
-    public Subscription(int course_id, int user_id) {
-        this.course_id = course_id;
-        this.user_id = user_id;
+    public Subscription(Users users, Course course) {
+        this.users = users;
+        this.course = course;
     }
 
     public int getId() {
@@ -45,22 +41,6 @@ public class Subscription {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCourse_id() {
-        return course_id;
-    }
-
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public double getProgress() {
@@ -93,5 +73,21 @@ public class Subscription {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

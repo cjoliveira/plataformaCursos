@@ -9,20 +9,22 @@ public class CourseApproval {
 
     @Id
     private int id;
-
-    @OneToOne
-    private int course_id;
     private String approved_by;
     private String status;
     private Timestamp created_at;
     private Timestamp updated_at;
 
+    // OneToOne -> Um curso aprovado para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
+    @OneToOne
+    @JoinColumn(name="course_id")
+    private Course course;
+
     public CourseApproval() {
     }
 
-    public CourseApproval(int course_id){
-        this.course_id = course_id;
-
+    public CourseApproval(Course course){
+        this.course = course;
     }
 
     public int getId() {
@@ -31,14 +33,6 @@ public class CourseApproval {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCourse_id() {
-        return course_id;
-    }
-
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
     }
 
     public String getApproved_by() {
@@ -71,5 +65,13 @@ public class CourseApproval {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

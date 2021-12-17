@@ -11,22 +11,26 @@ public class Certificate {
 
     @Id
     private int id;
-    private int course_id;
-    private int user_id;
     private Timestamp issued_at;
     private Timestamp created_at;
     private Timestamp updated_at;
-
+    // ManyToOne -> Vários cetificados para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+    // ManyToOne -> Vários cetificados para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
+    @ManyToOne
+    @JoinColumn(name = "users_id")
+    private Users users;
 
     public Certificate() {
     }
 
-    public Certificate(Course course) {
+    public Certificate(Course course, Users users) {
         this.course = course;
-        this.course_id = course.getId();
+        this.users = users;
     }
 
     public int getId() {
@@ -35,22 +39,6 @@ public class Certificate {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCourse_id() {
-        return course_id;
-    }
-
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
     }
 
     public Timestamp getIssued_at() {
@@ -75,5 +63,21 @@ public class Certificate {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 }

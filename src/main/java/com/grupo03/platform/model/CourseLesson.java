@@ -1,9 +1,6 @@
 package com.grupo03.platform.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -12,17 +9,21 @@ public class CourseLesson {
 
     @Id
     private int id;
-    @ManyToOne
-    private int course_id;
     private String title;
     private double duration;
     private Timestamp created_at;
     private Timestamp updated_at;
+    // ManyToOne -> Vários cetificados para um curso
+    // JoinColumn -> Tabela correspondente possui uma coluna com uma chave estrangeira para a tabela referenciada
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    public CourseLesson() {}
+    public CourseLesson() {
+    }
 
-    public CourseLesson(int course_id) {
-        this.course_id = course_id;
+    public CourseLesson(Course course) {
+        this.course = course;
     }
 
     public int getId() {
@@ -31,14 +32,6 @@ public class CourseLesson {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getCourse_id() {
-        return course_id;
-    }
-
-    public void setCourse_id(int course_id) {
-        this.course_id = course_id;
     }
 
     public String getTitle() {
@@ -71,5 +64,13 @@ public class CourseLesson {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
