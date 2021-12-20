@@ -1,16 +1,14 @@
 package com.grupo03.platform.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
 public class Certificate {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private Timestamp issued_at;
     private Timestamp created_at;
     private Timestamp updated_at;
@@ -33,11 +31,11 @@ public class Certificate {
         this.users = users;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

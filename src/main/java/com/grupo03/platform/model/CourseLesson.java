@@ -8,7 +8,8 @@ import java.sql.Timestamp;
 public class CourseLesson {
 
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String title;
     private double duration;
     private Timestamp created_at;
@@ -26,11 +27,11 @@ public class CourseLesson {
         this.course = course;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

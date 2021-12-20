@@ -1,6 +1,8 @@
 package com.grupo03.platform.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
 
@@ -8,19 +10,22 @@ import java.sql.Timestamp;
 public class Course {
 
     @Id
-    private int id;
+    @GeneratedValue( strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private String category;
     private String workload;
     private String status;
+    private Boolean has_certificate;
+    private Double evaluation;
     private Timestamp created_at;
     private Timestamp updated_at;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,5 +75,21 @@ public class Course {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public void setEvaluation(Double evaluation) {
+        this.evaluation = evaluation;
+    }
+
+    public void setHas_certificate(Boolean has_certificate) {
+        this.has_certificate = has_certificate;
+    }
+
+    public Boolean getHas_certificate() {
+        return has_certificate;
+    }
+
+    public Double getEvaluation() {
+        return evaluation;
     }
 }
